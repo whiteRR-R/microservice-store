@@ -11,3 +11,6 @@ class FakeUserRepository(AbstractUserRepository):
     
     def get(self, username: str):
         return next(user for user in self._users if user == username)
+    
+    def list(self):
+        return list(self._users)
