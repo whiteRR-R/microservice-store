@@ -6,7 +6,7 @@ from datetime import datetime
 Base = declarative_base()
 
 
-class User(Base):
+class UserModel(Base):
     __tablename__ = "User"
     
     id: str = mapped_column(Integer, primary_key=True)
