@@ -23,6 +23,10 @@ class User:
     def __repr__(self) -> str:
         return self._username
     
+    @property
+    def username(self):
+        return self._username
+    
     
     
     
