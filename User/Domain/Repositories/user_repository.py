@@ -8,5 +8,5 @@ class AbstractUserRepository(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def get(self, username: str):
+    def get_by_username(self, username: str):
         raise NotImplementedError
