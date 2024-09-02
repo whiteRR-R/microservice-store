@@ -14,26 +14,10 @@ def create_user(
 
 def test_user_created():
     repo = FakeUserRepository()
-    user = create_user(
-        "alex_m",
-        "alex",
-        "mercer",
-        "user@gmail.com",
-        "test"
-    )
-    
+    user = create_user("alex_m", "alex", "mercer", "user@gmail.com", "test")
+
     repo.add(user)
 
     users_list = repo.list()
-    
-    assert user in users_list 
 
-
-    
-    
-    
-    
-    
-    
-    
-    
+    assert user in users_list

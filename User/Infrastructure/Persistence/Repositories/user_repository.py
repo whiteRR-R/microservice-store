@@ -8,7 +8,7 @@ from sqlalchemy import select
 class UserRepository(AbstractUserRepository):
     def __init__(self, session: AsyncSession) -> None:
         self.session = session
-    
+
     async def add(self, user: User) -> None:
         user_model = UserModel(
             username=user.username,
@@ -18,23 +18,17 @@ class UserRepository(AbstractUserRepository):
             password=user.password,
             created_at=user.created_at,
             is_activate=user.is_activate,
-            is_superuser=user.is_superuser
+            is_superuser=user.is_superuser,
         )
-    
+
         await self.session.add(user_model)
         self.session.commit()
-    
-    
+
     async def get_by_username(self, username: str):
         user_model = await self.session.execute(
-            select(
-                UserModel
-            ).where(
-                UserModel.username == username
-            )
+            select(UserModel).where(UserModel.username == username)
         )
-        
+
         if user_model:
             return user_model
         return None
-    

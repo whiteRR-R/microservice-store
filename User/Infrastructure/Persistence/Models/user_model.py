@@ -6,7 +6,7 @@ from datetime import datetime
 
 class UserModel(Base):
     __tablename__ = "User"
-    
+
     id: str = mapped_column(Integer, primary_key=True)
     username = mapped_column(String, unique=True)
     firstname = mapped_column(String, nullable=False)
@@ -16,4 +16,3 @@ class UserModel(Base):
     created_at = mapped_column(DateTime, default=datetime)
     is_activate = mapped_column(Boolean, default=True)
     is_superuser = mapped_column(Boolean, default=False)
-    
