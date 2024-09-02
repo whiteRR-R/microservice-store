@@ -31,4 +31,16 @@ class UserRepository(AbstractUserRepository):
 
         if user_model:
             return user_model
+        
+        return None
+
+    async def change_user_email(self, username: str, new_email: str):
+        user_model = await self.session.execute(
+            select(UserModel).where(UserModel.username == username)
+        )
+
+        if user_model:
+            user_model.email = new_email
+
+        self.session.commit()
         return None
