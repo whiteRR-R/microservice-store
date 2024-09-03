@@ -12,7 +12,7 @@ class User:
         self.email = email
         self._password = password
         self.created_at = datetime.now()
-        self.is_activate = True
+        self.is_active = True
         self.is_superuser = False
 
     def __repr__(self) -> str:

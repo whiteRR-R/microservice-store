@@ -14,5 +14,5 @@ class UserModel(Base):
     email = mapped_column(String, nullable=False)
     password = mapped_column(String, nullable=False)
     created_at = mapped_column(DateTime, default=datetime)
-    is_activate = mapped_column(Boolean, default=True)
+    is_active = mapped_column(Boolean, default=True)
     is_superuser = mapped_column(Boolean, default=False)
