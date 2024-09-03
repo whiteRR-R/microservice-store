@@ -21,18 +21,17 @@ class UserRepository(AbstractUserRepository):
             is_superuser=user.is_superuser,
         )
 
-        await self.session.add(user_model)
-        self.session.commit()
+        self.session.add(user_model)
+        await self.session.flush()
+        await self.session.commit()
 
     async def get_by_username(self, username: str):
         user_model = await self.session.execute(
             select(UserModel).where(UserModel.username == username)
         )
 
-        if user_model:
-            return user_model
         
-        return None
+        return user_model.scalar_one_or_none()      
 
     async def change_user_email(self, username: str, new_email: str):
         user_model = await self.session.execute(
@@ -41,6 +40,6 @@ class UserRepository(AbstractUserRepository):
 
         if user_model:
             user_model.email = new_email
+            await self.session.commit()
 
-        self.session.commit()
         return None
