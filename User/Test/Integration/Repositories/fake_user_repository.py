@@ -1,5 +1,5 @@
 from Domain.Entities.user import User
-from Domain.Repositories.SQLAlchemyrepository import AbstractSQLAlchemyRepository
+from Domain.Repositories.sqlalchemy_repository import AbstractSQLAlchemyRepository
 
 
 class FakeUserRepository(AbstractSQLAlchemyRepository):
