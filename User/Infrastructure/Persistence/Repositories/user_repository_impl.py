@@ -1,4 +1,4 @@
-from Domain.Repositories.user_repository import AbstractUserRepository
+from Domain.Repositories.SQLAlchemyrepository import AbstractSQLAlchemyRepository
 from Domain.Entities.user import User
 from Infrastructure.Persistence.Models.user_model import UserModel
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import select
 
 
-class UserRepository(AbstractUserRepository):
+class UserRepository(AbstractSQLAlchemyRepository):
     def __init__(self, session: AsyncSession) -> None:
         self.session = session
 
