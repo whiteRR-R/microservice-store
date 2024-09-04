@@ -11,24 +11,18 @@ class UserRepository(AbstractUserRepository):
         self.session = session
 
     async def add(self, user: User) -> None:
-        try:
-            user_model = UserModel(
-                username=user.username,
-                firstname=user.firstname,
-                lastname=user.lastname,
-                email=user.email,
-                password=user.password,
-                created_at=user.created_at,
-                is_active=user.is_active,
-                is_superuser=user.is_superuser,
-            )
+        user_model = UserModel(
+            username=user.username,
+            firstname=user.firstname,
+            lastname=user.lastname,
+            email=user.email,
+            password=user.password,
+            created_at=user.created_at,
+            is_active=user.is_active,
+            is_superuser=user.is_superuser,
+        )
 
-            self.session.add(user_model)
-            await self.session.commit()
-
-        except IntegrityError:
-            await self.session.rollback()
-            raise ValueError(f"User with username '{user.username}' already exists.")
+        self.session.add(user_model)
 
     async def get_by_username(self, username: str):
         user_model = await self.session.execute(
@@ -37,13 +31,12 @@ class UserRepository(AbstractUserRepository):
 
         return user_model.scalar_one_or_none()
 
-    async def change_user_email(self, username: str, new_email: str):
+    async def change_email(self, user_id: id, new_email: str):
         user_model = await self.session.execute(
-            select(UserModel).where(UserModel.username == username)
+            select(UserModel).where(UserModel.id == id)
         )
 
         if user_model:
             user_model.email = new_email
-            await self.session.commit()
 
-        return None  # Add Exception
+        return user_model
