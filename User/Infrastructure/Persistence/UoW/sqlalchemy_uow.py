@@ -1,4 +1,4 @@
-from Infrastructure.Persistence.Repositories.user_repository_impl import UserRepository
+from Infrastructure.Persistence.Repositories.sqlalchemy_repository_impl import UserRepository
 from Applicatation.UoW.uow import AbstractUnitOfWork
 from sqlalchemy.ext.asyncio import AsyncSession
 
