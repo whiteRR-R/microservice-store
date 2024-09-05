@@ -15,10 +15,11 @@ class DataBase:
 
     def __new__(cls, *args, **kwargs):
         if not cls._isinstance:
-            cls._isinstance = super(DataBase, cls).__new__(cls, *args, **kwargs)
+            cls._isinstance = super(DataBase, cls).__new__(cls)
             cls._isinstance._engine = None
             cls._isinstance._session_maker = None
         return cls._isinstance
+
 
     async def __init__(self, db_url: str):
         if not self._engine:
