@@ -3,9 +3,9 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
     async_sessionmaker,
 )
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from contextlib import asynccontextmanager
-from config import config
+
 
 Base = declarative_base()
 
@@ -16,8 +16,8 @@ class DataBase:
     def __new__(cls, *args, **kwargs):
         if not cls._isinstance:
             cls._isinstance = super(DataBase, cls).__new__(cls, *args, **kwargs)
-            cls._instance._engine = None
-            cls._instance._session_maker = None
+            cls._isinstance._engine = None
+            cls._isinstance._session_maker = None
         return cls._isinstance
 
     async def __init__(self, db_url: str):
