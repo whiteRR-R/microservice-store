@@ -18,6 +18,14 @@ class User:
     def __repr__(self) -> str:
         return self._username
 
+    def change_password(self, old_password: str, new_password: str):
+        if self._password == old_password:
+            self._password = new_password
+
+    def change_email(self, new_email: str):
+        if self.email != new_email:
+            self.email = new_email
+
     @property
     def username(self):
         return self._username
