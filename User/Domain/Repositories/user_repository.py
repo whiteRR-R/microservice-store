@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from Domain.Entities.user import User
 
 
-class AbstractSQLAlchemyRepository(ABC):
+class AbstacractUserRepository(ABC):
 
     @abstractmethod
     def add(self, user: User):

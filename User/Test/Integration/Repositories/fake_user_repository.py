@@ -1,8 +1,8 @@
 from Domain.Entities.user import User
-from Domain.Repositories.sqlalchemy_repository import AbstractSQLAlchemyRepository
+from Domain.Repositories.user_repository import AbstacractUserRepository
 
 
-class FakeUserRepository(AbstractSQLAlchemyRepository):
+class FakeUserRepository(AbstacractUserRepository):
     def __init__(self) -> None:
         self._users = set()
 

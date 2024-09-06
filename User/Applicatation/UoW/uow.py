@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Domain.Repositories.sqlalchemy_repository import AbstractSQLAlchemyRepository
+from Domain.Repositories.user_repository import AbstractSQLAlchemyRepository
 
 
 class AbstractUnitOfWork(ABC):

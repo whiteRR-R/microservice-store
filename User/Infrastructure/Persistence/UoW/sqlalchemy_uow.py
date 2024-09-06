@@ -1,4 +1,4 @@
-from Infrastructure.Persistence.Repositories.sqlalchemy_repository_impl import UserRepository
+from Infrastructure.Persistence.Repositories.sqlalchemy_repository_impl import SQLAlchemyUserRepository
 from Applicatation.UoW.uow import AbstractUnitOfWork
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -9,7 +9,7 @@ class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
 
     async def __aenter__(self):
         self.session: AsyncSession = self.session_factory()
-        self.user_repository: UserRepository = UserRepository(self.session)
+        self.user_repository: SQLAlchemyUserRepository = SQLAlchemyUserRepository(self.session) # check this code line
         return await super().__aenter__()
 
     async def __aexit__(self, *args):
