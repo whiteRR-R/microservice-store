@@ -2,7 +2,7 @@ from Domain.Repositories.user_repository import AbstacractUserRepository
 from Domain.Entities.user import User
 from Infrastructure.Persistence.Models.user_model import UserModel
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, update
 
 
 class SQLAlchemyUserRepository(AbstacractUserRepository):
@@ -30,12 +30,9 @@ class SQLAlchemyUserRepository(AbstacractUserRepository):
 
         return user_model.scalar_one_or_none()
 
-    async def change_email(self, user_id: id, new_email: str):
+    async def update(self, user: User):
         user_model = await self.session.execute(
-            select(UserModel).where(UserModel.id == id)
+            update(UserModel)
+            .where(UserModel.username == user.username)
+            .values(user.__dict__)
         )
-
-        if user_model:
-            user_model.email = new_email
-
-        return user_model
