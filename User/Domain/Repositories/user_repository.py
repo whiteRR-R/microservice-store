@@ -12,3 +12,7 @@ class AbstacractUserRepository(ABC):
     @abstractmethod
     def get_by_username(self, username: str):
         raise NotImplementedError
+
+    @abstractmethod
+    def update(self, user: User):
+        raise NotImplementedError
