@@ -3,11 +3,13 @@ from sqlalchemy.ext.asyncio import (
     create_async_engine,
     async_sessionmaker,
 )
-from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import DeclarativeBase
 from contextlib import asynccontextmanager
+from Infrastructure.config import config
 
 
-Base = declarative_base()
+class Base(DeclarativeBase):
+    pass
 
 
 class DataBase:
@@ -20,8 +22,7 @@ class DataBase:
             cls._isinstance._session_maker = None
         return cls._isinstance
 
-
-    async def __init__(self, db_url: str):
+    def __init__(self, db_url: str):
         if not self._engine:
             self._engine = create_async_engine(url=db_url, echo=True)
             self._session_maker = async_sessionmaker(
@@ -31,9 +32,15 @@ class DataBase:
     @asynccontextmanager
     async def get_session(self):
         session: AsyncSession = self._session_maker()
+
+        async with self._engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
         try:
             yield session
         except Exception:
             await session.rollback()
         finally:
             await session.close()
+
+
+db = DataBase(config.database.database_url)
