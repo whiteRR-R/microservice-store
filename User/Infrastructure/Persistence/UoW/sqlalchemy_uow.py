@@ -1,5 +1,5 @@
 from Infrastructure.Persistence.Repositories.sqlalchemy_repository_impl import SQLAlchemyUserRepository
-from Applicatation.UoW.uow import AbstractUnitOfWork
+from Infrastructure.Persistence.UoW.uow_interface import AbstractUnitOfWork
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

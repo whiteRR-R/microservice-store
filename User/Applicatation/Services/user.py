@@ -1,5 +1,5 @@
 from typing import TYPE_CHECKING
-from Applicatation.UoW.uow import AbstractUnitOfWork
+from Infrastructure.Persistence.UoW.uow_interface import AbstractUnitOfWork
 from Domain.Entities.user import User
 
 if TYPE_CHECKING:
