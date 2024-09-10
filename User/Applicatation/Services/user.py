@@ -1,5 +1,9 @@
+from typing import TYPE_CHECKING
 from Applicatation.UoW.uow import AbstractUnitOfWork
 from Domain.Entities.user import User
+
+if TYPE_CHECKING:
+    from Presentation.Scheme.user import UserScheme
 
 
 class UserService:
@@ -7,14 +11,14 @@ class UserService:
     def __init__(self, uow: AbstractUnitOfWork) -> None:
         self.uow = uow
     
-    async def create_user(self, username: str, firstname: str, lastname: str, email: str, password: str):
+    async def create_user(self, user_scheme: UserScheme):
         async with self.uow:
             user = User(
-                username=username,
-                firstname=firstname,
-                lastname=lastname,
-                email=email,
-                password=password,
+                username=user_scheme.username,
+                firstname=user_scheme.firstname,
+                lastname=user_scheme.lastname,
+                email=user_scheme.email,
+                password=user_scheme.password,
             )
 
             await self.uow.user_repository.add(user)
