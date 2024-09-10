@@ -8,8 +8,10 @@ class AbstractUnitOfWork(ABC):
     async def __aenter__(self):
         return self
 
-    async def __aexit__(self, *args):
-        await self.rollback
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        if exc_type is not None:
+            await self.rollback()
+        await self.rollback()
 
     @abstractmethod
     async def commit():

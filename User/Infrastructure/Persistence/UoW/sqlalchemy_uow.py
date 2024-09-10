@@ -4,17 +4,18 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class SQLAlchemyUnitOfWork(AbstractUnitOfWork):
-    def __init__(self, session_factory):
-        self.session_factory = session_factory
+    def __init__(self, session: AsyncSession):
+        self.session = session
 
     async def __aenter__(self):
-        self.session: AsyncSession = self.session_factory()
         self.user_repository: SQLAlchemyUserRepository = SQLAlchemyUserRepository(self.session) # check this code line
         return await super().__aenter__()
 
-    async def __aexit__(self, *args):
-        await super().__aexit__(*args)
+    async def __aexit__(self, exc_type, exc_value, traceback):
+        if exc_type is not None:
+            await self.rollback()
         await self.session.close()
+        await super().__aexit__(exc_type, exc_value, traceback)
 
     async def commit(self):
         await self.session.commit()

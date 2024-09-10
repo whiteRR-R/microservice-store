@@ -15,7 +15,7 @@ class SQLAlchemyUserRepository(AbstacractUserRepository):
             firstname=user.firstname,
             lastname=user.lastname,
             email=user.email,
-            password=user.password,
+            password=user._password,
             created_at=user.created_at,
             is_active=user.is_active,
             is_superuser=user.is_superuser,
