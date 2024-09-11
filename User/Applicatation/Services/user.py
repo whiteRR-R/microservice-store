@@ -1,9 +1,7 @@
 from typing import TYPE_CHECKING
 from Infrastructure.Persistence.UoW.uow_interface import AbstractUnitOfWork
 from Domain.Entities.user import User
-
-if TYPE_CHECKING:
-    from Presentation.Scheme.user import UserScheme
+from Applicatation.DTO.user_create import UserCreateDTO
 
 
 class UserService:
@@ -11,14 +9,14 @@ class UserService:
     def __init__(self, uow: AbstractUnitOfWork) -> None:
         self.uow = uow
     
-    async def create_user(self, user_scheme: UserScheme):
+    async def create_user(self, user_dto: UserCreateDTO):
         async with self.uow:
             user = User(
-                username=user_scheme.username,
-                firstname=user_scheme.firstname,
-                lastname=user_scheme.lastname,
-                email=user_scheme.email,
-                password=user_scheme.password,
+                username=user_dto.username,
+                firstname=user_dto.firstname,
+                lastname=user_dto.lastname,
+                email=user_dto.email,
+                password=user_dto.password,
             )
 
             await self.uow.user_repository.add(user)
@@ -36,7 +34,7 @@ class UserService:
             user = await self.uow.user_repository.get_by_username(username)
             
             if user:
-                user = user.change_email(new_email)
+                user.change_email(new_email)
                 await self.uow.user_repository.update(user)
                 await self.uow.commit()
                 return user    
