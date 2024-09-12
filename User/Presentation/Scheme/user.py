@@ -1,10 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 class UserScheme(BaseModel):
     username: str
     firstname: str
     lastname: str
-    email: str
+    email: EmailStr
     password: str
 
     
