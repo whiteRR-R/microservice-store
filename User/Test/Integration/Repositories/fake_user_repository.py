@@ -1,5 +1,5 @@
 from Domain.Entities.user import User
-from Domain.Repositories.user_repository import AbstacractUserRepository
+from Domain.IRepositories.user_repository import AbstacractUserRepository
 
 
 class FakeUserRepository(AbstacractUserRepository):

@@ -1,4 +1,4 @@
-from Domain.Repositories.user_repository import AbstacractUserRepository
+from Domain.IRepositories.user_repository import AbstacractUserRepository
 from Domain.Entities.user import User
 from Infrastructure.Persistence.Models.user_model import UserModel
 from sqlalchemy.ext.asyncio import AsyncSession
