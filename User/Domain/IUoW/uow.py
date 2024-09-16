@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Domain.Repositories.user_repository import AbstacractUserRepository
+from Domain.IRepositories.user_repository import AbstacractUserRepository
 
 
 class AbstractUnitOfWork(ABC):

@@ -1,5 +1,4 @@
-from typing import TYPE_CHECKING
-from Infrastructure.Persistence.UoW.uow_interface import AbstractUnitOfWork
+from Domain.IUoW.uow import AbstractUnitOfWork
 from Domain.Entities.user import User
 from Applicatation.DTO.user_create import UserCreateDTO
 
@@ -29,6 +28,15 @@ class UserService:
             if user:
                 return user
     
+    async def change_password(self, username: str, old_password: str, new_password: str):
+        async with self.uow:
+            user = await self.uow.user_repository.get_by_username(username)
+
+            if user:
+                user.change_password(old_password, new_password)
+                await self.uow.user_repository.update(user)
+                await self.uow.commit()
+
     async def change_email(self, username: str, new_email: str):
         async with self.uow:
             user = await self.uow.user_repository.get_by_username(username)
@@ -37,5 +45,4 @@ class UserService:
                 user.change_email(new_email)
                 await self.uow.user_repository.update(user)
                 await self.uow.commit()
-                return user    
         
