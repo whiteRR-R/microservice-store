@@ -31,8 +31,15 @@ class SQLAlchemyUserRepository(AbstacractUserRepository):
         return user_model.scalar_one_or_none()
 
     async def update(self, user: User):
-        user_model = await self.session.execute(
+        await self.session.execute(
             update(UserModel)
-            .where(UserModel.username == user.username)
-            .values(user.__dict__)
+            .where(UserModel.username == user._username)
+            .values(
+                firstname=user.firstname,
+                lastname=user.lastname,
+                email=user.email,
+                password=user._password,
+                is_active=user.is_active,
+                is_superuser=user.is_superuser,
+            )
         )
