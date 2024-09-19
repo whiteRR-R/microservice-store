@@ -7,4 +7,13 @@ class UserScheme(BaseModel):
     email: EmailStr
     password: str
 
-    
+
+class UserChangePasswordScheme(BaseModel):
+    username: str
+    old_password: str
+    new_password: str
+
+
+class UserChangeEmailScheme(BaseModel):
+    username: str
+    new_email: str
