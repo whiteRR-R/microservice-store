@@ -12,4 +12,4 @@ class ConfigManager:
     database: DataBaseConfig = DataBaseConfig()
 
 
-config = ConfigManager()
+config_manager = ConfigManager()
