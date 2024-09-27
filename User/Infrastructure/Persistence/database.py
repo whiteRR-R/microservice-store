@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy.orm import DeclarativeBase
 from contextlib import asynccontextmanager
-from Infrastructure.config import config
+from Infrastructure.config import config_manager
 
 
 class Base(DeclarativeBase):
