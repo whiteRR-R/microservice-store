@@ -1,4 +1,4 @@
-from Infrastructure.database import Base
+from Infrastructure.Persistence.database import Base
 from sqlalchemy import String, Integer
 from sqlalchemy.orm import mapped_column, Mapped
 
