@@ -1,1 +1,1 @@
-from Infrastructure.Models.user_model import UserModel
+from Infrastructure.Persistence.Models.user_model import UserModel
