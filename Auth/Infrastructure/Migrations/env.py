@@ -22,7 +22,6 @@ from Infrastructure.Persistence.database import Base
 from Infrastructure.config import config_manager
 
 config.set_main_option("sqlalchemy.url", config_manager.database.database_url)
-print(config_manager.database.database_url)
 target_metadata = Base.metadata
 
 
