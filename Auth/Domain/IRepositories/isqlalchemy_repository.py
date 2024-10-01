@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class IAuthRepository(ABC):
+class ISQLAlchemyRepository(ABC):
 
     @abstractmethod
     def add(self):
