@@ -19,7 +19,7 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from Infrastructure.Persistence.database import Base
-from Infrastructure.config import config_manager
+from config import config_manager
 
 config.set_main_option("sqlalchemy.url", config_manager.database.database_url)
 target_metadata = Base.metadata
