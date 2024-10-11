@@ -2,7 +2,7 @@ from abc import abstractmethod, ABC
 from Domain.IRepositories.irepository import ISQLAlchemyRepository
 
 
-class ISQLAlchemyUoW(ABC):
+class ISQLAlchemyUnitOfWork(ABC):
     repository: ISQLAlchemyRepository
 
     @abstractmethod
