@@ -1,24 +1,25 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
-from Domain.IRepositories.irepository import ISQLAlchemyRepository
+from Domain.IRepositories.iauth_repository import ISQLAlchemyAuthRepository
+from Domain.Entities.user import User
 from Infrastructure.Persistence.Models.user_model import UserModel
 
 
-class SQLALchemyAuthRepository(ISQLAlchemyRepository):
+class SQLALchemyAuthRepository(ISQLAlchemyAuthRepository):
     def __init__(self, session) -> None:
         self.session: AsyncSession = session
     
-    async def add(self, username: str, email: str, password: str | bytes):
+    async def add(self, user: User):
         user_model = UserModel(
-            username=username,
-            email=email,
-            password=password
+            username=user.username,
+            email=user.email,
+            password=user.password
         )
 
         self.session.add(user_model)
         await self.session.commit()
 
-    async def get(self, username: str):
+    async def get_by_username(self, username: str):
         stmt = await self.session.execute(
             select(
                 UserModel

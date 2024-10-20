@@ -1,9 +1,9 @@
 from abc import abstractmethod, ABC
-from Domain.IRepositories.irepository import ISQLAlchemyRepository
+from Domain.IRepositories.iauth_repository import ISQLAlchemyAuthRepository
 
 
 class ISQLAlchemyUnitOfWork(ABC):
-    repository: ISQLAlchemyRepository
+    repository: ISQLAlchemyAuthRepository
 
     @abstractmethod
     async def __aenter__(self):
