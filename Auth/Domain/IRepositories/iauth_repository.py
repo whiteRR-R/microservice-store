@@ -5,6 +5,9 @@ class ISQLAlchemyAuthRepository(ABC):
     @abstractmethod
     async def add(self):
         raise NotImplementedError
+
+    async def update(self):
+        raise NotImplementedError
     
     async def get_by_username(self, username: str):
         raise NotImplementedError
