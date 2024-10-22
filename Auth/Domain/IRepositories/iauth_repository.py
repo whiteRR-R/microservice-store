@@ -14,3 +14,6 @@ class ISQLAlchemyAuthRepository(ABC):
 
     async def get_by_email(self, email: str):
         raise NotImplementedError
+
+    async def delete_by_username(self, username: str):
+        raise NotImplementedError

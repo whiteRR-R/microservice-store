@@ -41,3 +41,14 @@ class SQLALchemyAuthRepository(ISQLAlchemyAuthRepository):
 
         user_model = stmt.one_or_none()
         return user_model
+
+    async def delete_by_username(self, username: str):
+        await self.session.delete(
+            select(
+                UserModel
+            ).where(
+                UserModel.username == username
+            )
+        )
+
+        
