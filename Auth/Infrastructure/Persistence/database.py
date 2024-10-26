@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from contextlib import asynccontextmanager
-
+from Infrastructure.Persistence.mappers import map_entities
 
 
 class Base(DeclarativeBase):
@@ -27,8 +27,8 @@ class Database:
                 bind=self._engine,
                 expire_on_commit=False,
                 class_=AsyncSession,
-
             )
+            map_entities()
 
     async def create_database(self):
         async with self._engine.begin() as conn:
