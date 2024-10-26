@@ -1,4 +1,4 @@
-from Application.Command.base import Command
+from Application.Command.command import Command
 
 
 class DeleteUserCommand(Command):
