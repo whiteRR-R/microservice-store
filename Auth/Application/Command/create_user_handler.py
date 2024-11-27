@@ -6,7 +6,7 @@ class CreateUserCommandHandler:
     def __init__(self, auth_service: AuthService):
         self.auth_service = auth_service
     
-    async def handler(self, command: CreateUserCommand):
+    async def handle(self, command: CreateUserCommand):
         return await self.auth_service.create_user(
             username=command.username,
             password=command.password,

@@ -6,5 +6,5 @@ class DeleteUserCommandHandler:
     def __init__(self, auth_service: AuthService):
         self.auth_service = auth_service
     
-    async def handler(self, command: DeleteUserCommand):
+    async def handle(self, command: DeleteUserCommand):
         return await self.auth_service.delete_user(username=command.username)
