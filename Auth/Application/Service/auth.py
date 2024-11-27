@@ -7,7 +7,7 @@ from Domain.ValueObjects.username import Username
 from Application.Utils.decorators import transactional
 
 
-class AuthUseCase:
+class AuthService:
     
     def __init__(self, uow: ISQLAlchemyUnitOfWork, password_security: IPasswordSecurity):
         self.uow = uow
