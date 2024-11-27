@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class RegisterUserCommand(Command):
+class CreateUserCommand(Command):
     username: str
     email: str
     password: str
