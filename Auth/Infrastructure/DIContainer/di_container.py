@@ -28,4 +28,5 @@ class DIContainer:
         instance = await provider() if asyncio.iscoroutine(provider) else provider()
         self._instances[dependency_type] = instance
         return instance
-    
+
+container = DIContainer()
